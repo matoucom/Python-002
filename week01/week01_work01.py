@@ -19,22 +19,64 @@ bs_info = bs(response.text, 'html.parser')
 
 # print(response.text)
 
+film_list = []
+i = 0
+for tag in bs_info.find_all('div', attrs={'class':'movie-hover-info'}):
+    if i < 10:
+        child_tag = tag.find_all('div', attrs={'class':'movie-hover-title'})
+        # film_name = child_tag[0].find('span', attrs={'class':'name'}).text
+        film_name = child_tag[0].text.strip().split('\n')[0]
+        # film_score = child_tag[0].text.strip().split('\n')[-1]
+        # film_type = child_tag[1].text.replace('\n', '').split(':')[1].strip()
+        # print('1', film_type)
+        # film_type = child_tag[1].text.replace('\n', '').split(':')[1]
+        # print('2', film_type)
+        # film_type = child_tag[1].text.replace('\n', '').split(':')
+        # print('3', film_type)
+        # film_type = child_tag[1].text.replace('\n', '')
+        # print('4', film_type)
+        # film_type = child_tag[1].text
+        # print('5', film_type)
+        # film_type = child_tag[1]
+        # print('6', film_type)
+        # film_type = child_tag
+        # print('7', film_type)
+        film_type = child_tag[1].text.replace('\n', '').split(':')[1].strip()
+        # film_starring = child_tag[2].text.replace('\n', '').split(':')[1].strip()
+        film_time = child_tag[3].text.replace('\n', '').split(':')[1].strip()
+        film_list.append({
+            "电影名称": film_name,
+            # "评分": film_score,
+            "类型": film_type,
+            # "主演": film_starring,
+            "上映时间": film_time,
+        })
+        i = i + 1
+    else:
+        break
+df_result = pd.DataFrame(data = film_list)
+df_result.to_csv('./movie1.csv', encoding='utf-8', index=True, header=True)
+# df_result.head()
+# print(film_list)
+
+
+
 
 # for child in bs_info.find_all("div",class_='movie-hover-title'):
 #     child.span.decompose()
 #     print(child.text)
-
-film_name = []
-rating = []
-
-for tag in bs_info.find_all('div', attrs={'class':'movie-hover-info'}):
-    # print(tag.text.replace('\n', '').replace('              ', ' '))
-    for atag in tag.find_all('span', attrs={'class':'name'}):
-        # print(atag.text)
-        film_name.append(atag.text)
-    for itag in tag.find_all('i', attrs={'class':'integer'}):
-        for fratag in tag.find_all('i', attrs={'class':'fraction'}):
-            # print(itag.text + fratag.text)
-            rating.append(itag.text + fratag.text)
-
-print(film_name, rating)
+#
+# film_name = []
+# rating = []
+#
+# for tag in bs_info.find_all('div', attrs={'class':'movie-hover-info'}):
+#     # print(tag.text.replace('\n', '').replace('              ', ' '))
+#     for atag in tag.find_all('span', attrs={'class':'name'}):
+#         # print(atag.text)
+#         film_name.append(atag.text)
+#     for itag in tag.find_all('i', attrs={'class':'integer'}):
+#         for fratag in tag.find_all('i', attrs={'class':'fraction'}):
+#             # print(itag.text + fratag.text)
+#             rating.append(itag.text + fratag.text)
+#
+# print(film_name, rating)
