@@ -9,4 +9,9 @@ import scrapy
 class Week01Work02Item(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    # pass
+    film_title = scrapy.Field()
+    film_type = scrapy.Field()
+    film_time = scrapy.Field()
+
+
