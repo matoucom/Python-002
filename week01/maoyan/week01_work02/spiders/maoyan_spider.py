@@ -26,7 +26,7 @@ class MaoyanSpiderSpider(scrapy.Spider):
         # response.text.replace("<dd>", "</dd><dd>")
         # # for i in range(1, 11):
 
-        movies = Selector(response=response).xpath('//div[@class="movie-hover-info"]')[0:11]
+        movies = Selector(response=response).xpath('//div[@class="movie-hover-info"]')[0:10]
         for movie in movies:
             item = Week01Work02Item()
             child_tag = movie.xpath('./div[contains(@class,"movie-hover-title")]')
@@ -45,9 +45,10 @@ class MaoyanSpiderSpider(scrapy.Spider):
             # print(film_starring.extract()[1].replace('\n', '').strip())
             print(film_time.extract()[1].replace('\n', '').strip())
             # break
-            item['film_title'] = film_title
-            item['film_type'] = film_type
-            item['film_time'] = film_time
+            item['film_title'] = film_title.extract_first().strip()
+            item['film_type'] = film_type.extract()[1].replace('\n', '').strip()
+            item['film_time'] = film_time.extract()[1].replace('\n', '').strip()
+            yield item
 
         # film_title = Selector(response=response).xpath('//*[@id="app"]/div/div[2]/div[2]/dl/dd[1]/div[1]/div[2]/a/div/div[1]/span[1]/text()')
         # film_score = Selector(response=response).xpath('//*[@id="app"]/div/div[2]/div[2]/dl/dd[1]/div[1]/div[2]/a/div/div[1]/span[2]/i/text()')
