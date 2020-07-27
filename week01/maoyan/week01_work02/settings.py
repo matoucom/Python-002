@@ -65,9 +65,9 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'week01_work02.pipelines.Week01Work02Pipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'week01_work02.pipelines.Week01Work02Pipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
