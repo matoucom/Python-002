@@ -7,3 +7,6 @@ yum install mysql-community-server
 pip install pymysql
 
 dic  append  试试
+
+
+https://github.com/jiangxianli/ProxyIpLib

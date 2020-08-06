@@ -15,6 +15,7 @@ NEWSPIDER_MODULE = 'week02_work01.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'week02_work01 (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -26,6 +27,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 #DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -54,6 +56,21 @@ ROBOTSTXT_OBEY = True
 #    'week02_work01.middlewares.Week02Work01DownloaderMiddleware': 543,
 #}
 
+DOWNLOADER_MIDDLEWARES = {
+   'week02_work01.middlewares.Week02Work01DownloaderMiddleware': 543,
+   'week02_work01.middlewares.RandomHttpProxyMiddleware': 400,
+}
+
+HTTP_PROXY_LIST = {
+   'http://183.63.188.250:8080',
+   '113.161.68.30:80',
+   '163.125.159.103:8888',
+   '119.57.108.89:53281',
+   '58.220.95.42:10174',
+   '114.249.112.168:9000',
+   '112.47.3.53:3128',
+   '27.189.13.177:3128',
+}
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
@@ -62,9 +79,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'week02_work01.pipelines.Week02Work01Pipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'week02_work01.pipelines.Week02Work01Pipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
